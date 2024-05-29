@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  db:
+    image: mongo:5.0-focal
+    # restart: always
+    container_name: nestpkmon
+    ports:
+      - 27024:27017
+    environment:
+      - MONGO_DATABASE=nest-pokemon
+    volumes:
+      - ./mongo:/data/db
