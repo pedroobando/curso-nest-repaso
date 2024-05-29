@@ -9,6 +9,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Pokemon, PokemonDocument } from './entities/pokemon.entity';
 import { CreatePokemonDto, UpdatePokemonDto } from './dto';
 import { PaginationDto } from 'src/common/dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PokemonService {
@@ -17,9 +18,9 @@ export class PokemonService {
   constructor(
     @InjectModel(Pokemon.name)
     private readonly pokemonModel: Model<PokemonDocument>,
-    // private readonly configService: ConfigService,
+    private readonly configService: ConfigService,
   ) {
-    // this.defaulLimit = configService.get<number>('defaultLimit');
+    this.defaulLimit = configService.get<number>('defaultLimit');
   }
 
   async create(createPokemonDto: CreatePokemonDto): Promise<Pokemon> {
@@ -40,7 +41,7 @@ export class PokemonService {
       .limit(limit)
       .skip(offset)
       .sort({ no: 1 })
-      .select('-__v');
+      .select(['-__v']);
   }
 
   async findOne(term: string): Promise<PokemonDocument> {
