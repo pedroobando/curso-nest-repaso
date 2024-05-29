@@ -43,7 +43,7 @@ export class PokemonService {
       .select('-__v');
   }
 
-  async findOne(term: string) {
+  async findOne(term: string): Promise<PokemonDocument> {
     let pokemon: PokemonDocument;
 
     // Por no
@@ -89,9 +89,9 @@ export class PokemonService {
     // const pokemon = await this.findOne(id);
     // await pokemon.delete();
     const removePokemon = await this.pokemonModel.findByIdAndDelete(id);
-    if (!removePokemon)
+    if (!removePokemon) {
       throw new BadRequestException(`Pokemon with id "${id}" not found`);
-    return removePokemon;
+    }
   }
 
   private handleExceptions(error: any): void {
