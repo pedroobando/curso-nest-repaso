@@ -15,3 +15,7 @@ Introduccion al TypeScript, conceptos basicos que se deben conocer para el curso
 ## Card-Dealership
 
 La prime aplicacion en Nest.js, la base de datos es manejada mediante un arreglo que se crea en memoria. Aqui se crean dos (2) modulos _cars_ y _brands_ donde se realiza un CRUD de cada uno de ellos.
+
+## Card-Dealership
+
+Un restapi, muy bueno el cual realiza una conexion a una base de datos mongodb, aqui se explicas muchos conceptos como DTO, Pipes, Decoradores, Docker, etc.
