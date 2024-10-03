@@ -32,7 +32,12 @@ export class ProductsService {
         // images: images.map((image) => this.productImageRepository.create({ url: image })),
       });
       const newProduct = await this.productRepository.save(product);
-      return { ...newProduct, checkSlugInsert: Product.prototype.checkSlugInsert };
+
+      return {
+        ...newProduct,
+        checkSlugUpdate: Product.prototype.checkSlugUpdate,
+        checkSlugInsert: Product.prototype.checkSlugInsert,
+      };
     } catch (error) {
       this.handleDBExeptions(error);
     }

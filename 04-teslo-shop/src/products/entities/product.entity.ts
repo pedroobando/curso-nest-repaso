@@ -44,7 +44,7 @@ export class Product {
   // user: User;
 
   @BeforeInsert()
-  checkSlugInsert() {
+  checkSlugInsert(): void {
     if (!this.slug) {
       this.slug = this.title;
     }
@@ -54,8 +54,10 @@ export class Product {
     this.updatedAt = new Date().getTime();
   }
 
-  // @BeforeUpdate()
-  // checkSlugUpdate() {
-  //   this.slug = this.slug.toLowerCase().replaceAll(' ', '_').replaceAll("'", '');
-  // }
+  @BeforeUpdate()
+  checkSlugUpdate(): void {
+    this.slug = this.slug.toLowerCase().replaceAll(' ', '_').replaceAll("'", '');
+
+    this.updatedAt = new Date().getTime();
+  }
 }
