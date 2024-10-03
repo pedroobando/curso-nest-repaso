@@ -6,10 +6,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { ConfigService } from '@nestjs/config';
 import { Pokemon, PokemonDocument } from './entities/pokemon.entity';
 import { CreatePokemonDto, UpdatePokemonDto } from './dto';
 import { PaginationDto } from 'src/common/dto';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PokemonService {
