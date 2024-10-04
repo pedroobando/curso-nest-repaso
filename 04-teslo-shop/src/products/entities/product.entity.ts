@@ -1,4 +1,4 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'products' })
 export class Product {
@@ -11,6 +11,8 @@ export class Product {
   @Column({ type: 'text', nullable: true })
   description: string;
 
+  @Column({ type: 'text', nullable: false })
+  @Index({ unique: true })
   slug: string;
 
   @Column({ type: 'int', default: 0 })
@@ -27,6 +29,8 @@ export class Product {
 
   @Column('text', { array: true, default: [] })
   tags: string[];
+
+  tagsentry: string;
 
   @Column({ type: 'numeric', nullable: false })
   createdAt: number;
@@ -45,6 +49,9 @@ export class Product {
 
   @BeforeInsert()
   checkSlugInsert(): void {
+    this.title = this.title.trim();
+    this.description = this.description ? this.description.trim() : this.description;
+
     if (!this.slug) {
       this.slug = this.title;
     }
@@ -56,7 +63,10 @@ export class Product {
 
   @BeforeUpdate()
   checkSlugUpdate(): void {
-    this.slug = this.slug.toLowerCase().replaceAll(' ', '_').replaceAll("'", '');
+    this.title = this.title.trim();
+    this.description = this.description ? this.description.trim() : this.description;
+
+    this.slug = this.slug.trim().toLowerCase().replaceAll(' ', '_').replaceAll("'", '');
 
     this.updatedAt = new Date().getTime();
   }
