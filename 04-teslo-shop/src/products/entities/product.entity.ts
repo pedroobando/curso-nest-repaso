@@ -1,4 +1,5 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ProductImage } from './product-image.entity';
 
 @Entity({ name: 'products' })
 export class Product {
@@ -38,11 +39,11 @@ export class Product {
   @Column({ type: 'numeric', nullable: false })
   updatedAt: number;
 
-  // @OneToMany(() => ProductImage, (productImage) => productImage.product, {
-  //   cascade: true,
-  //   eager: true,
-  // })
-  // images?: ProductImage[];
+  @OneToMany(() => ProductImage, (productImage) => productImage.product, {
+    cascade: true,
+    eager: true,
+  })
+  images?: ProductImage[];
 
   // @ManyToOne(() => User, (user) => user.product, { eager: true })
   // user: User;
