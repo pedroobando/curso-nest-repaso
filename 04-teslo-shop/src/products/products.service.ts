@@ -157,6 +157,16 @@ export class ProductsService {
     return await this.productRepository.remove(productRemove);
   }
 
+  async deleteAllProducts(): Promise<any> {
+    const queryRemove = await this.productRepository.createQueryBuilder('product');
+
+    try {
+      return await queryRemove.delete().where({}).execute();
+    } catch (error) {
+      this.handleDBExeptions(error);
+    }
+  }
+
   private handleDBExeptions(error: any): never {
     if (error.code === '23505') {
       throw new BadRequestException(error.detail);
