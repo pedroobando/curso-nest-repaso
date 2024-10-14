@@ -9,6 +9,7 @@ import { ProductsModule } from './products/products.module';
 import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
 import { FilesModule } from './files/files.module';
+import { Minios3Module } from './minios3/minios3.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { FilesModule } from './files/files.module';
     CommonModule,
     SeedModule,
     FilesModule,
+    Minios3Module,
   ],
 })
 export class AppModule {}
